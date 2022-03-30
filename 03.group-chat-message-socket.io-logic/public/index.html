@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Socket.io</title>
+  </head>
+  <body>
+    <div class='main_container'>
+        <div class='introduction_page'>
+            <div class='introduction_page_box'>
+                <input class='introduction_page_name_input' placeholder="Enter your name.." required></input>
+                <select class='introduction_page_room_select' id='room_select'>
+                    <option value='cars'>Cars</option>
+                    <option value='motorbikes'>Motorbikes</option>
+                    <option value='trucks'>Trucks</option>
+                </select>
+                <button class='introduction_page_enter_chat_button' id='enter_chats_button'>Enter chat page</button>
+            </div>
+        </div>
+        <div class='chat_page display_none'>
+            <p class='username_label'></p>
+            <div class='chatboxes_container'>
+            </div>
+        </div>
+    </div>
+
+    <script src="./socket.io/socket.io.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
