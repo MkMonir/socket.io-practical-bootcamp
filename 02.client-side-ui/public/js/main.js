@@ -1,11 +1,23 @@
-const socket = io('/');
+import store from './store.js';
+import ui from './ui.js';
+import socketHandler from './socketHandler.js';
 
-socket.on('connect', () => {
-  console.log('Successfully connected' + socket.id);
+const nameInput = document.querySelector('.introduction_page_name_input');
+
+nameInput.addEventListener('keyup', (event) => {
+  store.setUsername(event.target.value);
 });
 
-socket.on('client', (msg) => {
-  console.log(msg);
+const roomSelect = document.getElementById('room_select');
+roomSelect.addEventListener('change', (event) => {
+  console.log('room changed');
+  console.log(event.target.value);
+  store.setRoomId(event.target.value);
+});
 
-  socket.emit('server', 'Hello Server');
+const chatPageButton = document.getElementById('enter_chats_button');
+chatPageButton.addEventListener('click', () => {
+  // go to chat page
+  ui.goToChatPage();
+  socketHandler.connectToSocketIoServer();
 });
