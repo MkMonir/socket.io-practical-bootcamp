@@ -189,9 +189,16 @@ const createRoomChatbox = () => {
     if (key === 'Enter') {
       const author = store.getUsername();
       const messageContent = event.target.value;
-      // note: Send message to socket.io server
-      socket.io.sendGroupChatMessage(author, messageContent);
+      const authorSocketId = store.getSocketId();
 
+      const data = {
+        author,
+        messageContent,
+        authorSocketId,
+        roomId,
+      };
+
+      socketHandler.sendRoomMessage(data);
       newMessageInput.value = '';
     }
   });

@@ -15,12 +15,10 @@ const io = socketio(server);
 
 io.on('connection', (socket) => {
   console.log(socket.id);
-  socket.on('group-chat-message', (data) => {
-    console.log('Group Message');
-    console.log(data);
 
-    io.emit('group-chat-message', data);
-  });
+  socket.on('server', (msg) => console.log(msg));
+
+  socket.emit('client', 'Hello Client');
 });
 
 const PORT = 5000 || process.env.PORT;

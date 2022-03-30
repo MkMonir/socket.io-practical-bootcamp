@@ -10,8 +10,6 @@ nameInput.addEventListener('keyup', (event) => {
 
 const roomSelect = document.getElementById('room_select');
 roomSelect.addEventListener('change', (event) => {
-  console.log('room changed');
-  console.log(event.target.value);
   store.setRoomId(event.target.value);
 });
 
