@@ -1,9 +1,9 @@
 const getChatbox = (data) => {
   const { chatboxLabel, chatboxMessagesId, chatboxInputId, chatboxId } = data;
 
-  const chatboxContainer = document.createElement("div");
-  chatboxContainer.classList.add("chatbox_container");
-  chatboxContainer.setAttribute("id", chatboxId);
+  const chatboxContainer = document.createElement('div');
+  chatboxContainer.classList.add('chatbox_container');
+  chatboxContainer.setAttribute('id', chatboxId);
 
   chatboxContainer.innerHTML = `
     <div class='chatbox_label_container'>
@@ -21,8 +21,8 @@ const getChatbox = (data) => {
 
 const getGroupChatMessage = (data) => {
   const { author, messageContent } = data;
-  const messageContainer = document.createElement("div");
-  messageContainer.classList.add("message_container");
+  const messageContainer = document.createElement('div');
+  messageContainer.classList.add('message_container');
   messageContainer.innerHTML = `
     <p class='message_paragraph'>
         <span class='message_author'>${author}: </span>${messageContent}
@@ -34,9 +34,9 @@ const getGroupChatMessage = (data) => {
 
 const getDirectChatMessage = (data) => {
   const { messageContent, alignRight } = data;
-  const messageContainer = document.createElement("div");
+  const messageContainer = document.createElement('div');
 
-  const messageClass = alignRight ? "message_right" : "message_left";
+  const messageClass = alignRight ? 'message_right' : 'message_left';
 
   messageContainer.innerHTML = `<p class='${messageClass}'>${messageContent}</p>`;
   return messageContainer;

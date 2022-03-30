@@ -14,11 +14,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 const io = socketio(server);
 
 io.on('connection', (socket) => {
-  console.log(socket.id);
+  socket.on('group-chat-message', (data) => {
+    console.log(data);
 
-  socket.on('server', (msg) => console.log(msg));
-
-  socket.emit('client', 'Hello Client');
+    io.emit('group-chat-message', data);
+  });
 });
 
 const PORT = 5000 || process.env.PORT;
