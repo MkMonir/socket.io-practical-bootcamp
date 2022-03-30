@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     console.log('Group Message');
     console.log(data);
 
-    socket.broadcast.emit('group-chat-message', data);
+    io.emit('group-chat-message', data);
   });
 });
 
