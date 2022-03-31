@@ -19,7 +19,29 @@ io.on('connection', (socket) => {
   socket.on('group-chat-message', (data) => {
     io.emit('group-chat-message', data);
   });
+
+  socket.on('register-new-user', (userData) => {
+    const { username } = userData;
+
+    const newPeer = {
+      username,
+      socketId: socket.id,
+    };
+
+    connectedPeers = [...connectedPeers, newPeer];
+    broadcastConnectedPeers();
+  });
+
+  socket.on('disconnect', () => {
+    connectedPeers = connectedPeers.filter((peer) => peer.socketId !== socket.id);
+    broadcastConnectedPeers();
+  });
 });
+
+const broadcastConnectedPeers = () => {
+  const data = { connectedPeers };
+  io.emit('active-peers', data);
+};
 
 const PORT = 5000 || process.env.PORT;
 server.listen(PORT, () => {

@@ -8,11 +8,23 @@ const connectToSocketIoServer = () => {
 
   socket.on('connect', () => {
     console.log('Successfully connected' + socket.id);
+    registerActiveSession();
   });
 
   socket.on('group-chat-message', (data) => {
     ui.appendGroupChatMessage(data);
   });
+
+  socket.on('active-peers', (data) => {
+    ui.updateActiveChatboxes(data);
+  });
+};
+
+const registerActiveSession = () => {
+  const userData = {
+    username: store.getUsername(),
+  };
+  socket.emit('register-new-user', userData);
 };
 
 const sendGroupChatMessage = (author, messageContent) => {
