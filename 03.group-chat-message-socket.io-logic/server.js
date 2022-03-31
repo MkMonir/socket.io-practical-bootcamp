@@ -13,11 +13,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const io = socketio(server);
 
+let connectedPeers = [];
+
 io.on('connection', (socket) => {
   socket.on('group-chat-message', (data) => {
-    console.log(data);
-
     io.emit('group-chat-message', data);
+  });
+
+  socket.on('register-new-user', (userData) => {
+    const { username } = userData;
+
+    const newPeer = {
+      username,
+      socketId: socket.id,
+    };
+
+    connectedPeers = [...connectedPeers, newPeer];
+  });
+
+  socket.on('disconnect', () => {
+    connectedPeers = connectedPeers.filter((peer) => peer.socketId !== socket.id);
   });
 });
 
